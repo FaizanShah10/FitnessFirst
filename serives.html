@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <nav x-data="{ open: false }" class="bg-red-800">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div class="flex h-16 items-center justify-between">
+            <div class="flex items-center">
+              <div class="flex-shrink-0">
+                <img class="h-8 w-8" src="gym.png" alt="Your Company">
+              </div>
+              <div class="hidden md:block">
+                <div class="ml-10 flex items-baseline space-x-4">
+                  <a href="index.html" class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page" x-state:on="Current" x-state:off="Default" x-state-description="Current: &quot;bg-gray-900 text-white&quot;, Default: &quot;text-gray-300 hover:bg-gray-700 hover:text-white&quot;">Home</a>
+                  <a href="#aboutme" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" x-state-description="undefined: &quot;bg-gray-900 text-white&quot;, undefined: &quot;text-gray-300 hover:bg-gray-700 hover:text-white&quot;">About</a>
+                  <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" x-state-description="undefined: &quot;bg-gray-900 text-white&quot;, undefined: &quot;text-gray-300 hover:bg-gray-700 hover:text-white&quot;">Services</a>
+                  <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" x-state-description="undefined: &quot;bg-gray-900 text-white&quot;, undefined: &quot;text-gray-300 hover:bg-gray-700 hover:text-white&quot;">Challenges</a>
+                  <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" x-state-description="undefined: &quot;bg-gray-900 text-white&quot;, undefined: &quot;text-gray-300 hover:bg-gray-700 hover:text-white&quot;">Book</a>
+                  <a href="#contactme" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" x-state-description="undefined: &quot;bg-gray-900 text-white&quot;, undefined: &quot;text-gray-300 hover:bg-gray-700 hover:text-white&quot;">Contact</a>
+                  
+                </div>
+              </div>
+            </div>
+            <div class="hidden md:block">
+              <div class="ml-4 flex items-center md:ml-6">
+                <button type="button" class="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                  <span class="absolute -inset-1.5"></span>
+                  <span class="sr-only">View notifications</span>
+                  <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"></path>
+  </svg>
+                </button>
+  
+                <!-- Profile dropdown -->
+                <div x-data="Components.menu({ open: false })" x-init="init()" @keydown.escape.stop="open = false; focusButton()" @click.away="onClickAway($event)" class="relative ml-3">
+                  <div>
+                    <button type="button" class="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" id="user-menu-button" x-ref="button" @click="onButtonClick()" @keyup.space.prevent="onButtonEnter()" @keydown.enter.prevent="onButtonEnter()" aria-expanded="false" aria-haspopup="true" x-bind:aria-expanded="open.toString()" @keydown.arrow-up.prevent="onArrowUp()" @keydown.arrow-down.prevent="onArrowDown()">
+                      <span class="absolute -inset-1.5"></span>
+                      <span class="sr-only">Open user menu</span>
+                      <img class="h-8 w-8 rounded-full" src="" alt="">
+                    </button>
+                  </div>
+                  
+                    <div x-show="open" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95" class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" x-ref="menu-items" x-description="Dropdown menu, show/hide based on menu state." x-bind:aria-activedescendant="activeDescendant" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1" @keydown.arrow-up.prevent="onArrowUp()" @keydown.arrow-down.prevent="onArrowDown()" @keydown.tab="open = false" @keydown.enter.prevent="open = false; focusButton()" @keyup.space.prevent="open = false; focusButton()" style="display: none;">
+                      <a href="#" class="block px-4 py-2 text-sm text-gray-700" x-state:on="Active" x-state:off="Not Active" :class="{ 'bg-gray-100': activeIndex === 0 }" role="menuitem" tabindex="-1" id="user-menu-item-0" @mouseenter="onMouseEnter($event)" @mousemove="onMouseMove($event, 0)" @mouseleave="onMouseLeave($event)" @click="open = false; focusButton()">Your Profile</a>
+                      <a href="#" class="block px-4 py-2 text-sm text-gray-700" :class="{ 'bg-gray-100': activeIndex === 1 }" role="menuitem" tabindex="-1" id="user-menu-item-1" @mouseenter="onMouseEnter($event)" @mousemove="onMouseMove($event, 1)" @mouseleave="onMouseLeave($event)" @click="open = false; focusButton()">Settings</a>
+                      <a href="#" class="block px-4 py-2 text-sm text-gray-700" :class="{ 'bg-gray-100': activeIndex === 2 }" role="menuitem" tabindex="-1" id="user-menu-item-2" @mouseenter="onMouseEnter($event)" @mousemove="onMouseMove($event, 2)" @mouseleave="onMouseLeave($event)" @click="open = false; focusButton()">Sign out</a>
+                      
+                    </div>
+                  
+                </div>
+              </div>
+            </div>
+            <div class="-mr-2 flex md:hidden">
+              <!-- Mobile menu button -->
+              <button type="button" class="relative inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" aria-controls="mobile-menu" @click="open = !open" aria-expanded="false" x-bind:aria-expanded="open.toString()">
+                <span class="absolute -inset-0.5"></span>
+                <span class="sr-only">Open main menu</span>
+                <svg x-state:on="Menu open" x-state:off="Menu closed" class="block h-6 w-6" :class="{ 'hidden': open, 'block': !(open) }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path>
+  </svg>
+                <svg x-state:on="Menu open" x-state:off="Menu closed" class="hidden h-6 w-6" :class="{ 'block': open, 'hidden': !(open) }" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+  </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+  
+        <div x-description="Mobile menu, show/hide based on menu state." class="md:hidden" id="mobile-menu" x-show="open" style="display: none;">
+   
+          <div class="border-t border-gray-700 pb-3 pt-4">
+            <div class="flex items-center px-5">
+              <div class="flex-shrink-0">
+                <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=2&amp;w=256&amp;h=256&amp;q=80" alt="">
+              </div>
+              <div class="ml-3">
+                <div class="text-base font-medium leading-none text-white">Tom Cook</div>
+                <div class="text-sm font-medium leading-none text-gray-400">tom@example.com</div>
+              </div>
+              <button type="button" class="relative ml-auto flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                <span class="absolute -inset-1.5"></span>
+                <span class="sr-only">View notifications</span>
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"></path>
+  </svg>
+              </button>
+            </div>
+            <div class="mt-3 space-y-1 px-2">
+              <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white">Your Profile</a>
+              <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white">Settings</a>
+              <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white">Sign out</a>
+              
+            </div>
+          </div>
+        </div>
+      </nav>
+
+
+
+      <div class="relative overflow-hidden bg-cover bg-no-repeat h-96"
+      style="background-image: url(background-gym.webp); height:auto;">
+      <h1 class="p-12 text-white font-bold text-4xl text-center">OUR SERVICES</h1>
+      <p class="pb-7 text-white text-center text-xl">Choose Your Pricing Plan</p>
+      <p class="pl-12 pr-12  text-white text-center md:ml-16 md:mr-16">Lorem ipsum dolor sit amet consectetur adipisicing elit. Non cumque possimus itaque sequi atque! Sapiente nesciunt autem hic eius accusantium! Odio a totam similique dicta non assumenda deleniti modi debitis!</p>
+      
+        <div class="card bg-black mt-7 h-auto ">
+          <br>
+            <div class="m-10 border-solid border-2 border-gray-300 bg-black">
+                <h1 class="text-white text-center text-lg pt-5 pb-3">Cardio Fitness</h1>
+                <p class="text-white text-center text-sm underline underline-offset-1  pb-5 cursor-pointer">Read More</p>
+                <p class="text-white text-center text-sm">45 min</p>
+                <p class="text-white text-center text-sm">$99</p>
+                  <button class="pl-4 pr-4 pt-2 pb-2 bg-red-600 text-white rounded-sm justify-center items-center grid m-auto mt-4 mb-4 hover:bg-red-900">Book Now</button>  
+            </div>
+
+            <div class="m-10 border-solid border-2 border-gray-300 bg-black">
+              <h1 class="text-white text-center text-lg pt-5 pb-3">TRX</h1>
+              <p class="text-white text-center text-sm underline underline-offset-1  pb-5 cursor-pointer">Read More</p>
+              <p class="text-white text-center text-sm">45 min</p>
+              <p class="text-white text-center text-sm">$99</p>
+                <button class="pl-4 pr-4 pt-2 pb-2 bg-red-600 text-white rounded-sm justify-center items-center grid m-auto mt-4 mb-4 hover:bg-red-900">Book Now</button>  
+          </div>
+
+          <div class="m-10 border-solid border-2 border-gray-300 bg-black">
+            <h1 class="text-white text-center text-lg pt-5 pb-3">Posture correction</h1>
+            <p class="text-white text-center text-sm underline underline-offset-1  pb-5 cursor-pointer">Read More</p>
+            <p class="text-white text-center text-sm">45 min</p>
+            <p class="text-white text-center text-sm">$99</p>
+              <button class="pl-4 pr-4 pt-2 pb-2 bg-red-600 text-white rounded-sm justify-center items-center grid m-auto mt-4 mb-4 hover:bg-red-900">Book Now</button>  
+        </div>
+
+        <div class="m-10 border-solid border-2 border-gray-300 bg-black">
+          <h1 class="text-white text-center text-lg pt-5 pb-3">Muscle Toning</h1>
+          <p class="text-white text-center text-sm underline underline-offset-1  pb-5 cursor-pointer">Read More</p>
+          <p class="text-white text-center text-sm">45 min</p>
+          <p class="text-white text-center text-sm">$99</p>
+            <button class="pl-4 pr-4 pt-2 pb-2 bg-red-600 text-white rounded-sm justify-center items-center grid m-auto mt-4 mb-4 hover:bg-red-900">Book Now</button>  
+      </div>
+
+      <div class="m-10 border-solid border-2 border-gray-300 bg-black">
+        <h1 class="text-white text-center text-lg pt-5 pb-3">Weight Loss</h1>
+        <p class="text-white text-center text-sm underline underline-offset-1  pb-5 cursor-pointer">Read More</p>
+        <p class="text-white text-center text-sm">45 min</p>
+        <p class="text-white text-center text-sm">$99</p>
+          <button class="pl-4 pr-4 pt-2 pb-2 bg-red-600 text-white rounded-sm justify-center items-center grid m-auto mt-4 mb-4 hover:bg-red-900">Book Now</button>  
+    </div>
+
+    <div class="m-10 border-solid border-2 border-gray-300 bg-black">
+      <h1 class="text-white text-center text-lg pt-5 pb-3">Core Strength</h1>
+      <p class="text-white text-center text-sm underline underline-offset-1  pb-5 cursor-pointer">Read More</p>
+      <p class="text-white text-center text-sm">45 min</p>
+      <p class="text-white text-center text-sm">$99</p>
+        <button class="pl-4 pr-4 pt-2 pb-2 bg-red-600 text-white rounded-sm justify-center items-center grid m-auto mt-4 mb-4 hover:bg-red-900">Book Now</button>  
+  </div>
+        </div>
+        
+
+        <!-- Classes -->
+        <div class="classes bg-black h-auto">
+          <h1 class="text-center text-white text-3xl pt-7">Our Classes</h1>
+          <main class="mx-4 my-16">
+
+        
+            <!-- Plans -->
+            <div class="flex flex-col items-center justify-center mt-16 space-y-8 lg:flex-row lg:items-stretch lg:space-x-8 lg:space-y-0">
+              <template x-for="(plan, i) in plans" x-key="i">
+                <section class="flex flex-col w-full max-w-sm p-12 space-y-6 rounded-lg shadow-md">
+                  <!-- Price -->
+                  <div class="flex-shrink-0">
+                    <span class="text-4xl font-medium tracking-tight" :class="plan.name == 'Basic' ? 'text-green-500' : ''" x-text="`$${billPlan == 'monthly' ? plan.price.monthly : plan.price.annually}`"></span>
+                    <span class="text-white" x-text="billPlan == 'monthly' ? '/month' : '/year'"></span>
+                  </div>
+        
+                  <!--  -->
+                  <div class="flex-shrink-0 pb-6 space-y-2 border-b">
+                    <h2 class="text-2xl font-normal" x-text="plan.name"></h2>
+                    <p class="text-sm text-gray-400" x-text="plan.discretion"></p>
+                  </div>
+        
+                  <!-- Features -->
+                  
+        
+                  <!-- Button -->
+                  
+                </section>
+              </template>
+            
+                <section class="flex flex-col w-full max-w-sm p-12 space-y-6 bg-black rounded-lg shadow-md border-solid border-2 border-gray-500 text-white">
+                  <!-- Price -->
+                  <div class="flex-shrink-0">
+                    <span class="text-4xl font-medium tracking-tight" :class="plan.name == 'Basic' ? 'text-green-500' : ''" x-text="`$${billPlan == 'monthly' ? plan.price.monthly : plan.price.annually}`">$29</span>
+                    <span class="text-gray-400" x-text="billPlan == 'monthly' ? '/month' : '/year'">/month</span>
+                  </div>
+        
+                  <!--  -->
+                  <div class="flex-shrink-0 pb-6 space-y-2 border-b">
+                    <h2 class="text-2xl font-normal" x-text="plan.name">New Member Trial</h2>
+                    <p class="text-sm text-gray-400" x-text="plan.discretion">Get to know the studio and our classes</p>
+                  </div>
+        
+                  <!-- Features -->
+                  <ul class="flex-1 space-y-4">
+                    
+                  
+                      <li class="flex items-start">
+                        <span class=" text-base font-medium">5 classes</span>
+                      </li>
+                    
+                      <li class="flex items-start">
+                        Open studio access
+                      </li>
+
+                      <li class="flex items-start">
+                        Online Resources
+                    </li>
+                    </ul>
+        
+                  <!-- Button -->
+                  <div class="flex-shrink-0 pt-4">
+                    <button class="inline-flex items-center justify-center w-full max-w-xs px-4 py-2 transition-colors border rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 bg-red-600  hover:bg-red-900 text-white hover:text-white" >Book Now</button>
+                  </div>
+                </section>
+              
+                <section class="flex flex-col w-full max-w-sm p-12 space-y-6 bg-black rounded-lg shadow-md border-solid border-2 border-gray-500 text-white">
+                  <!-- Price -->
+                  <div class="flex-shrink-0">
+                    <span class="text-4xl font-medium tracking-tight text-green-500" :class="plan.name == 'Basic' ? 'text-green-500' : ''" x-text="`$${billPlan == 'monthly' ? plan.price.monthly : plan.price.annually}`">$59</span>
+                    <span class="text-gray-400" x-text="billPlan == 'monthly' ? '/month' : '/year'">/month</span>
+                  </div>
+        
+                  <!--  -->
+                  <div class="flex-shrink-0 pb-6 space-y-2 border-b">
+                    <h2 class="text-2xl font-normal" x-text="plan.name">Most Unlimited</h2>
+                    <p class="text-sm text-gray-400" x-text="plan.discretion">Better for growing businesses that want more customers.</p>
+                  </div>
+        
+                  <!-- Features -->
+                  <ul class="flex-1 space-y-4">
+                    
+                  
+                      <li class="flex items-start">
+                        
+                        <span class="ml-3 text-base font-medium" x-text="feature">Unlimited Classes</span>
+                      </li>
+                    
+                      <li class="flex items-start">
+                        
+                        <span class="ml-3 text-base font-medium" x-text="feature">Open studio access</span>
+                      </li>
+                    
+                      <li class="flex items-start">
+                        
+                        <span class="ml-3 text-base font-medium" x-text="feature">Online resources</span>
+                      </li>
+                    
+                      <li class="flex items-start">
+                        
+                        <span class="ml-3 text-base font-medium" x-text="feature">1 guest pass</span>
+                      </li>
+
+                      <li class="flex items-start">
+                        
+                        <span class="ml-3 text-base font-medium" x-text="feature">Free Wi-fi</span>
+                      </li>
+                    </ul>
+        
+                  <!-- Button -->
+                  <div class="flex-shrink-0 pt-4">
+                    <button class="inline-flex items-center justify-center w-full max-w-xs px-4 py-2 transition-colors border rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2  bg-red-600 text-white hover:bg-red-900" :class="plan.name == 'Basic' ? 'bg-indigo-500 text-white hover:bg-indigo-700' : 'hover:bg-indigo-500 hover:text-white'" x-text="`Get ${plan.name}`">Book Now</button>
+                  </div>
+                </section>
+              
+                <section class="flex flex-col w-full max-w-sm p-12 space-y-6 bg-black rounded-lg shadow-md border-solid border-2 border-gray-500 text-white">
+                  <!-- Price -->
+                  <div class="flex-shrink-0">
+                    <span class="text-4xl font-medium tracking-tight" :class="plan.name == 'Basic' ? 'text-green-500' : ''" x-text="`$${billPlan == 'monthly' ? plan.price.monthly : plan.price.annually}`">$139</span>
+                    <span class="text-gray-400" x-text="billPlan == 'monthly' ? '/month' : '/year'">/month</span>
+                  </div>
+        
+                  <!--  -->
+                  <div class="flex-shrink-0 pb-6 space-y-2 border-b">
+                    <h2 class="text-2xl font-normal" x-text="plan.name">8 personal sessions</h2>
+                    <p class="text-sm text-gray-400" x-text="plan.discretion">Advanced features for pros who need more customization.</p>
+                  </div>
+        
+                  <!-- Features -->
+                  <ul class="flex-1 space-y-4">
+                      <li class="flex items-start">
+                        
+                        <span class="ml-3 text-base font-medium" x-text="feature">8 personal training sessions</span>
+                      </li>
+                    
+                      <li class="flex items-start">
+                        
+                        <span class="ml-3 text-base font-medium" x-text="feature">4 classes</span>
+                      </li>
+                    
+                      <li class="flex items-start">
+                        
+                        <span class="ml-3 text-base font-medium" x-text="feature">Open studio access</span>
+                      </li>
+                    
+                      <li class="flex items-start">
+                        
+                        <span class="ml-3 text-base font-medium" x-text="feature">1 Guest pass</span>
+                      </li>
+
+                      <li class="flex items-start">
+                        
+                        <span class="ml-3 text-base font-medium" x-text="feature">Free Wi-fi</span>
+                      </li>
+                    </ul>
+        
+                  <!-- Button -->
+                  <div class="flex-shrink-0 pt-4">
+                    <button class="inline-flex items-center justify-center w-full max-w-xs px-4 py-2 transition-colors border rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 bg-red-600 hover:bg-red-900 text-white hover:text-white" :class="plan.name == 'Basic' ? 'bg-red-600 text-white hover:bg-red-900' : 'hover:bg-red-900 hover:text-white'" x-text="`Get ${plan.name}`">Book Now</button>
+                  </div>
+                </section>
+              </div>
+          </main>
+        </div>
+      </div>
+
+
+      <!-- Footer -->
+      <div class="footer bg-red-600 h-auto md:flex-wrap">
+        <h1 class="text-white p-7 text-3xl text-center font-bold">JOIN US ON MOBILE</h1>
+        <p class="text-black p-1 text-center">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Praesentium aspernatur, id porro officiis doloremque excepturi quas, quod quam saepe dolorem</p>
+        <div class="flex justify-center md:mt-5">
+          <img class="ml-6 h-16 cursor-pointer" src="google-play-badge.png" alt="">
+          <img class="h-11 mt-2 cursor-pointer" src="apple btn.png" alt="">
+        </div>
+        <p class="p-7 text-white text-center">Made by Faizan Naveed</p>
+        <div class="bg-black w-full h-12"></div>
+      </div>
+</body>
+</html>
